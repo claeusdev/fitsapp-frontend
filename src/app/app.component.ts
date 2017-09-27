@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { WaypointService } from './services/waypoint.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [WaypointService]
 })
 
 export class AppComponent {
@@ -36,16 +38,10 @@ export class AppComponent {
   ]
 
   // Setting Markers
-  waypoints: waypoint[] = [
-    {
-      name: "Company One",
-      lat: 59.911491,
-      lng: 10.757933,
-      draggable: true
-    }
-  ];
-  constructor(){
+  waypoints: waypoint[];
 
+  constructor(private _waypointService:WaypointService){
+    this.waypoints = this._waypointService.getWaypoints();
   }
 
   clickedWaypoint(waypoint:waypoint,index:number){
@@ -90,6 +86,7 @@ export class AppComponent {
     }
 
     this.waypoints.push(newWaypoint);
+    this._waypointService.addWaypoint(newWaypoint);
   }
 }
 
