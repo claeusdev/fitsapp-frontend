@@ -69,6 +69,8 @@ export class AppComponent {
 
     var newLat = $event.coords.lat;
     var newLng = $event.coords.lng;
+
+    this._waypointService.updateWaypoint(updatedWaypoint, newLat, newLng);
   }
 
   addWaypoint() {
@@ -87,6 +89,16 @@ export class AppComponent {
 
     this.waypoints.push(newWaypoint);
     this._waypointService.addWaypoint(newWaypoint);
+  }
+
+  removeWaypoint(waypoint){
+    for(var i = 0; i < this.waypoints.length; i++){
+      if(waypoint.lat == this.waypoints[i].lat && waypoint.lng == this.waypoints[i].lng){
+        this.waypoints.splice(i, 1);
+      }
+    }
+
+    this._waypointService.removeWaypoint(waypoint);
   }
 }
 

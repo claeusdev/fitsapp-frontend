@@ -8,13 +8,13 @@
           <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">
               <ng-template>
                 {{ w.name }}
+                <a class='del' (click)='removeWaypoint(w)'>Remove waypoint</a>
               </ng-template>
           </agm-snazzy-info-window>
         </agm-marker>
     </agm-map>
 
 <hr>
-    {{ diagnostic }}
     <h1>Add a Waypoint</h1>
     <form (submit)='addWaypoint()'>
       <label>Location</label>
